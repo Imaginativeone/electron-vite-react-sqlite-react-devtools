@@ -25,13 +25,14 @@ export default defineConfig(({ command }) => {
         main: {
           // Shortcut of `build.lib.entry`
           entry: 'electron/main/index.ts',
-          onstart(args) {
-            if (process.env.VSCODE_DEBUG) {
-              console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App')
-            } else {
-              args.startup()
-            }
-          },
+          onstart: (option) => option.startup(['.']),
+          // onstart(args) {
+          //   if (process.env.VSCODE_DEBUG) {
+          //     console.log(/* For `.vscode/.debug.script.mjs` */'[startup] Electron App')
+          //   } else {
+          //     args.startup()
+          //   }
+          // },
           vite: {
             build: {
               sourcemap,
@@ -74,3 +75,12 @@ export default defineConfig(({ command }) => {
     clearScreen: false,
   }
 })
+
+// electron([
+//   {
+//     entry: 'electron/main.ts',
+//     onstart: (option) => option.startup(['.']),
+//     // ... other configs
+//   },
+//   // ... other configs
+// ])

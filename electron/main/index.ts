@@ -5,6 +5,8 @@ import path from 'node:path'
 import os from 'node:os'
 import { update } from './update'
 
+import installExtension, { REDUX_DEVTOOLS, REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+
 const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -82,6 +84,12 @@ async function createWindow() {
 }
 
 app.whenReady().then(createWindow)
+
+app.whenReady().then(() => {
+  installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS])
+      .then((name) => console.log(`Added Extension:  ${name}`))
+      .catch((err) => console.log('An error occurred: ', err));
+})
 
 app.on('window-all-closed', () => {
   win = null
