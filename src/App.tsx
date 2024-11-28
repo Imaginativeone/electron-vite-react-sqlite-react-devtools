@@ -2,12 +2,27 @@ import { useState } from 'react'
 import UpdateElectron from '@/components/update'
 import logoVite from './assets/logo-vite.svg'
 import logoElectron from './assets/logo-electron.svg'
+
+import { MantineProvider, Button, Group } from '@mantine/core'
+
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
   return (
-    <div className='App'>
+    <div className='App;root'>
+      <MantineProvider>
+        <Group>
+          <Button       styles={{
+        root: { backgroundColor: 'azure' },
+        // label: { color: 'blue' },
+        // inner: { fontSize: 20 },
+      }}>Filled variant</Button>
+          <Button variant="filled">Filled variant</Button>
+          <Button variant="danger">Danger variant</Button>
+          <Button variant="primary">Primary variant</Button>
+        </Group>
+      </MantineProvider>
       <div className='logo-box'>
         <a href='https://github.com/electron-vite/electron-vite-react' target='_blank'>
           <img src={logoVite} className='logo vite' alt='Electron + Vite logo' />
